@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2bxg3s3rgfp5"]
+
+[ext_resource type="Script" path="res://charge_jump_block.gd" id="1_abo57"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dfsg2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f3xrw"]
+
+[node name="charge_jump_block" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_abo57")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_dfsg2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_f3xrw")
