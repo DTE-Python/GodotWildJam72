@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://i6ai58f8crww"]
+
+[ext_resource type="Script" path="res://hold_rise_block.gd" id="1_ku6ke"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_avn3f"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s05e1"]
+
+[node name="hold_rise_block" type="RigidBody3D"]
+script = ExtResource("1_ku6ke")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_avn3f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_s05e1")
