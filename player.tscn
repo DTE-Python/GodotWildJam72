@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://28ux2u1sqevk"]
+[gd_scene load_steps=5 format=3 uid="uid://opr670vdo67o"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_hqqjy"]
 
@@ -29,6 +29,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.557, 0)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 light_color = Color(1, 1, 0.941176, 1)
+spot_range = 3.969
+spot_angle = 21.25
 
 [node name="Area3D" type="Area3D" parent="Camera3D"]
 collision_layer = 8388608

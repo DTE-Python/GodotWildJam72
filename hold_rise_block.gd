@@ -31,7 +31,7 @@ func _ready():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	var current_height = get_transform().origin.y
 	var current_time = Time.get_unix_time_from_system()
 	var target_height = (max_height + start_height) - current_height

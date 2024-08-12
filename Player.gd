@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var flashlight:SpotLight3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+var jumping = false
+var can_jump = 0
 @export_range(0,0.1) var SENSITIVITY = 0.05
 
 @export var flashlightArea:Area3D
@@ -27,11 +29,18 @@ func _physics_process(delta):
 
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta
-
+		velocity.y -= gravity * delta #* 1.01 if velocity.y>0 else 1
+	if is_on_floor():
+		can_jump = 10
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and can_jump>0:
 		velocity.y = JUMP_VELOCITY
+		jumping = true
+		can_jump = 0
+	if jumping and !Input.is_action_pressed("jump") and velocity.y>0:
+		jumping = false
+		velocity.y = 0
+		
 	if Input.is_action_just_pressed("flashlight"):
 		flashlight.visible = !flashlight.visible
 		flashlightArea.monitoring = flashlight.visible
@@ -48,8 +57,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	can_jump-=1
 	move_and_slide()
+	if abs(velocity.y) < abs(get_platform_velocity().y):
+		velocity = get_platform_velocity()
+	
 
 
 

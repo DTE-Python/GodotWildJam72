@@ -5,7 +5,9 @@ var start_time = 0
 var elapsed_time = 0
 
 @onready var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
-@export var max_height = 5.0
+@export var max_height = 20.0
+
+@export var mesh:MeshInstance3D
 
 var release_time = 0
 
@@ -32,20 +34,18 @@ func _process(delta):
 	else:
 		light_charge -= 0.01
 	
-	if light_charge <= 0:
-		light_charge = 0
-	elif light_charge >= 1:
-		light_charge = 1
+	light_charge = clamp(light_charge,0,1)
 	
 	if light_charge > 0:
 		if held:
 			apply_central_force(Vector3(0, 0, 0))
 		else:
-			apply_central_force(Vector3.UP * gravity * target_height)
+			apply_central_force(Vector3.UP * gravity * target_height*light_charge)
 			
 	for collision in get_colliding_bodies():
 		if "floor" in collision.name.to_lower():
 			start_height = current_height
+	mesh.get_active_material(0).set_shader_parameter("light_charge",light_charge)
 
 
 func _input(event):
