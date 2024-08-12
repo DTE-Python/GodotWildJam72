@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://28ux2u1sqevk"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_hqqjy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5etv8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7saoy"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ffop2"]
+points = PackedVector3Array(0, -1.5, -4, 0, 1.5, -4, 1.5, 0, -4, -1.5, 0, -4, 1.1, 1, -4, -1.1, 1, -4, 1.1, -1, -4, -1.1, -1, -4, 0, 0, 0)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "flashlight", "flashlightArea")]
+script = ExtResource("1_hqqjy")
+camera = NodePath("Camera3D")
+flashlight = NodePath("Camera3D/SpotLight3D")
+SENSITIVITY = 0.012
+flashlightArea = NodePath("Camera3D/Area3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_5etv8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_7saoy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.557, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_color = Color(1, 1, 0.941176, 1)
+
+[node name="Area3D" type="Area3D" parent="Camera3D"]
+collision_layer = 8388608
+collision_mask = 8388608
+
+[node name="flashlight_collider" type="CollisionShape3D" parent="Camera3D/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+shape = SubResource("ConvexPolygonShape3D_ffop2")
+
+[connection signal="body_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Camera3D/Area3D" to="." method="_on_area_3d_body_exited"]
