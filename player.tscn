@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://opr670vdo67o"]
+[gd_scene load_steps=5 format=3 uid="uid://b373jwb3wo6m6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_hqqjy"]
 
@@ -9,18 +9,18 @@
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ffop2"]
 points = PackedVector3Array(0, -1.5, -4, 0, 1.5, -4, 1.5, 0, -4, -1.5, 0, -4, 1.1, 1, -4, -1.1, 1, -4, 1.1, -1, -4, -1.1, -1, -4, 0, 0, 0)
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "flashlight", "flashlightArea")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "flashlight", "flashlightArea") groups=["Player"]]
 script = ExtResource("1_hqqjy")
 camera = NodePath("Camera3D")
 flashlight = NodePath("Camera3D/SpotLight3D")
 SENSITIVITY = 0.012
 flashlightArea = NodePath("Camera3D/Area3D")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_5etv8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["Player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_7saoy")
 

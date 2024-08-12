@@ -9,9 +9,7 @@ var elapsed_time = 0
 
 @export var mesh:MeshInstance3D
 
-var release_time = 0
-
-var antigrav = 0
+var release_time = 0.0
 var held = false
 var start_height = 0
 var light_charge = 0
@@ -34,18 +32,21 @@ func _process(delta):
 	else:
 		light_charge -= 0.01
 	
-	light_charge = clamp(light_charge,0,1)
+	light_charge = clamp(light_charge, 0, 1)
 	
 	if light_charge > 0:
 		if held:
 			apply_central_force(Vector3(0, 0, 0))
 		else:
-			apply_central_force(Vector3.UP * gravity * target_height*light_charge)
+			#if current_time - release_time < 5 and current_height < target_height:
+				#apply_central_force(Vector3.UP * gravity * target_height)
+			apply_central_force(Vector3.UP * gravity * target_height * light_charge)
 			
 	for collision in get_colliding_bodies():
-		if "floor" in collision.name.to_lower():
+		if "floor" in collision.name:
 			start_height = current_height
-	mesh.get_active_material(0).set_shader_parameter("light_charge",light_charge)
+	
+	mesh.get_active_material(0).set_shader_parameter("light_charge", light_charge)
 
 
 func _input(event):
@@ -55,7 +56,6 @@ func _input(event):
 func _on_player_body_entered(body):
 	if body == self:
 		held = true
-
 
 func _on_player_body_exited(body):
 	if body == self:

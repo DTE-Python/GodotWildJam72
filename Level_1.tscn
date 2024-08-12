@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://qg34dqw0unj7"]
+[gd_scene load_steps=8 format=3 uid="uid://cq2evqbicb1ns"]
 
-[ext_resource type="PackedScene" uid="uid://opr670vdo67o" path="res://player.tscn" id="1_qdbye"]
-[ext_resource type="PackedScene" uid="uid://bn4qi24d6cpba" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
-[ext_resource type="PackedScene" uid="uid://c3demp5segmx1" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
+[ext_resource type="PackedScene" uid="uid://b373jwb3wo6m6" path="res://player.tscn" id="1_qdbye"]
+[ext_resource type="PackedScene" uid="uid://d2bxg3s3rgfp5" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
+[ext_resource type="PackedScene" uid="uid://i6ai58f8crww" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
+[ext_resource type="PackedScene" uid="uid://s5n7db7yv2ef" path="res://level_goal.tscn" id="4_5iwyi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyx7j"]
 size = Vector3(20, 0.1, 20)
@@ -17,7 +18,7 @@ background_energy_multiplier = 0.23
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.56
 
-[node name="Base" type="Node3D"]
+[node name="Level_1" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -30,7 +31,6 @@ mesh = SubResource("BoxMesh_4c3wm")
 
 [node name="charge_jump_block" parent="." instance=ExtResource("2_45utv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96002, 1.89604, -6.42631)
-max_height = 20.0
 
 [node name="hold_rise_block" parent="." instance=ExtResource("3_rid4w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.905336, 2.58771, -5.05949)
@@ -50,7 +50,11 @@ environment = SubResource("Environment_107vr")
 transform = Transform3D(0.993894, -0.110341, 6.57686e-09, 0.0837565, 0.754432, 0.651013, -0.0718337, -0.647037, 0.759067, 0, 1.8034, 0)
 light_energy = 0.222
 
+[node name="LevelGoal" parent="." instance=ExtResource("4_5iwyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36031, 1.84796)
+
 [connection signal="body_entered" from="Player" to="charge_jump_block" method="_on_player_body_entered"]
 [connection signal="body_entered" from="Player" to="hold_rise_block" method="_on_player_body_entered"]
 [connection signal="body_exited" from="Player" to="charge_jump_block" method="_on_player_body_exited"]
 [connection signal="body_exited" from="Player" to="hold_rise_block" method="_on_player_body_exited"]
+[connection signal="Loading" from="LevelGoal" to="Player" method="_on_level_goal_loading"]

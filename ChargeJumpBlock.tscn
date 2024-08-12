@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn4qi24d6cpba"]
+[gd_scene load_steps=6 format=3 uid="uid://d2bxg3s3rgfp5"]
 
 [ext_resource type="Script" path="res://charge_jump_block.gd" id="1_abo57"]
 [ext_resource type="Shader" path="res://ChargeJumpBlock.gdshader" id="2_ex6rv"]
@@ -22,7 +22,6 @@ axis_lock_linear_x = true
 axis_lock_linear_z = true
 lock_rotation = true
 script = ExtResource("1_abo57")
-max_height = 5.0
 mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
