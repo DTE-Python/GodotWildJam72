@@ -1,14 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2bxg3s3rgfp5"]
+[gd_scene load_steps=6 format=3 uid="uid://bn4qi24d6cpba"]
 
 [ext_resource type="Script" path="res://charge_jump_block.gd" id="1_abo57"]
+[ext_resource type="Shader" path="res://ChargeJumpBlock.gdshader" id="2_ex6rv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7yjht"]
+render_priority = 0
+shader = ExtResource("2_ex6rv")
+shader_parameter/light_charge = null
+shader_parameter/start_color = Color(0, 1, 0, 1)
+shader_parameter/end_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_dfsg2"]
+material = SubResource("ShaderMaterial_7yjht")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_f3xrw"]
 
-[node name="charge_jump_block" type="RigidBody3D"]
-gravity_scale = 0.0
+[node name="charge_jump_block" type="RigidBody3D" node_paths=PackedStringArray("mesh")]
+collision_layer = 8388609
+collision_mask = 8388609
+axis_lock_linear_x = true
+axis_lock_linear_z = true
+lock_rotation = true
 script = ExtResource("1_abo57")
+max_height = 5.0
+mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_dfsg2")

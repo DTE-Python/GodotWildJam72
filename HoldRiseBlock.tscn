@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://i6ai58f8crww"]
+[gd_scene load_steps=5 format=3 uid="uid://c3demp5segmx1"]
 
 [ext_resource type="Script" path="res://hold_rise_block.gd" id="1_ku6ke"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_avn3f"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sdfl3"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_s05e1"]
+material = SubResource("StandardMaterial3D_sdfl3")
 
 [node name="hold_rise_block" type="RigidBody3D"]
+collision_layer = 8388609
+collision_mask = 8388609
 script = ExtResource("1_ku6ke")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
