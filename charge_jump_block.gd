@@ -60,3 +60,4 @@ func _on_player_body_entered(body):
 func _on_player_body_exited(body):
 	if body == self:
 		held = false
+

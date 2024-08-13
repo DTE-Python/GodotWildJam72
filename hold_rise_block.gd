@@ -71,3 +71,4 @@ func _on_player_body_exited(body):
 	if body == self:
 		held = false
 		release_time = Time.get_unix_time_from_system()
+

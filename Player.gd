@@ -5,6 +5,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 var jumping = false
 var can_jump = 0
+var spotlight = false
 @export_range(0,0.1) var SENSITIVITY = 0.05
 
 @export var flashlightArea:Area3D
@@ -29,7 +30,9 @@ func _physics_process(delta):
 
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta #* 1.01 if velocity.y>0 else 1
+		
+		velocity.y -= gravity * delta * (0.5 if spotlight else 1)#* (2 if velocity.y>0 else 1)
+		
 	if is_on_floor():
 		can_jump = 10
 	# Handle jump.
@@ -71,3 +74,12 @@ func _on_area_3d_body_entered(body):
 
 func _on_area_3d_body_exited(body):
 	emit_signal("body_exited", body)
+
+
+func _on_spotlight_entered(body):
+	if body == self:
+		spotlight = true
+
+func _on_spotlight_exited(body):
+	if body == self:
+		spotlight = false
