@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2bxg3s3rgfp5"]
+[gd_scene load_steps=6 format=3 uid="uid://cqbiqupleo8xb"]
 
 [ext_resource type="Script" path="res://charge_jump_block.gd" id="1_abo57"]
 [ext_resource type="Shader" path="res://ChargeJumpBlock.gdshader" id="2_ex6rv"]
