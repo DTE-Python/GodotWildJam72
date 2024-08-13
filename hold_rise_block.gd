@@ -43,11 +43,14 @@ func _physics_process(delta):
 		else:
 			hold_pos = true
 			
+	if current_height > target_height and not hold_pos and not held:
+		apply_central_force(Vector3.DOWN)
+			
 	if hold_pos:
 		apply_central_force(Vector3.UP * gravity * target_height * float_speed)
 		linear_velocity  *= 1 - drag
 		linear_velocity *= 1 - angular_drag
-		#print(current_time - release_time)
+
 
 	if current_time - release_time >= hold_time and held<1:
 		hold_pos = false
@@ -55,17 +58,17 @@ func _physics_process(delta):
 
 
 	for collision in get_colliding_bodies():
-		if "floor" in collision.name.to_lower():
+		if "floor" in collision.name:
 			start_height = current_height
 
 
 func _input(event):
 	pass
 
-
 func _on_player_body_entered(body):
 	if body == self:
 		held +=1
+
 
 func _on_player_body_exited(body):
 	if body == self:

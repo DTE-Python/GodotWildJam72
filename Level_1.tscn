@@ -1,3 +1,4 @@
+
 [gd_scene load_steps=11 format=3 uid="uid://qg34dqw0unj7"]
 
 [ext_resource type="PackedScene" uid="uid://dq0qf3a3fwaw6" path="res://player.tscn" id="1_qdbye"]
@@ -5,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://buwylo2oxe406" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
 [ext_resource type="PackedScene" uid="uid://dhfrdolt4haqy" path="res://Spotlight.tscn" id="4_drlly"]
 [ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://button.tscn" id="5_fim7w"]
+[ext_resource type="PackedScene" uid="uid://s5n7db7yv2ef" path="res://level_goal.tscn" id="4_5iwyi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyx7j"]
 size = Vector3(20, 0.1, 20)
@@ -25,7 +27,7 @@ size = Vector3(5, 5, 5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ec5qy"]
 size = Vector3(5, 5, 5)
 
-[node name="Base" type="Node3D"]
+[node name="Level_1" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
@@ -58,6 +60,8 @@ environment = SubResource("Environment_107vr")
 transform = Transform3D(0.993894, -0.110341, 6.57686e-09, 0.0837565, 0.754432, 0.651013, -0.0718337, -0.647037, 0.759067, 0, 1.8034, 0)
 light_energy = 0.222
 
+[node name="LevelGoal" parent="." instance=ExtResource("4_5iwyi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36031, 1.84796)
 [node name="Spotlight" parent="." instance=ExtResource("4_drlly")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07829, 5.12503, -7.59749)
 
@@ -77,6 +81,7 @@ shape = SubResource("BoxShape3D_ec5qy")
 [connection signal="body_entered" from="Player" to="hold_rise_block" method="_on_player_body_entered"]
 [connection signal="body_exited" from="Player" to="charge_jump_block" method="_on_player_body_exited"]
 [connection signal="body_exited" from="Player" to="hold_rise_block" method="_on_player_body_exited"]
+[connection signal="Loading" from="LevelGoal" to="Player" method="_on_level_goal_loading"]
 [connection signal="body_entered" from="Spotlight" to="charge_jump_block" method="_on_player_body_entered"]
 [connection signal="body_entered" from="Spotlight" to="hold_rise_block" method="_on_player_body_entered"]
 [connection signal="body_entered" from="Spotlight" to="Player" method="_on_spotlight_entered"]
