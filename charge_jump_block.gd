@@ -12,7 +12,7 @@ var elapsed_time = 0
 var release_time = 0
 
 var antigrav = 0
-var held = false
+var held = 0
 var start_height = 0
 var light_charge = 0
 
@@ -29,7 +29,7 @@ func _process(delta):
 	var current_time = Time.get_unix_time_from_system()
 	var target_height = (max_height + start_height) - current_height
 	
-	if held and current_height < target_height:
+	if held>0 and current_height < target_height:
 		light_charge += 0.01
 	else:
 		light_charge -= 0.01
@@ -54,10 +54,10 @@ func _input(event):
 
 func _on_player_body_entered(body):
 	if body == self:
-		held = true
+		held += 1
 
 
 func _on_player_body_exited(body):
 	if body == self:
-		held = false
+		held -= 1
 

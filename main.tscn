@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://qg34dqw0unj7"]
+[gd_scene load_steps=11 format=3 uid="uid://qg34dqw0unj7"]
 
 [ext_resource type="PackedScene" uid="uid://dq0qf3a3fwaw6" path="res://player.tscn" id="1_qdbye"]
 [ext_resource type="PackedScene" uid="uid://cqbiqupleo8xb" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
 [ext_resource type="PackedScene" uid="uid://buwylo2oxe406" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
-[ext_resource type="Script" path="res://Spotlight.gd" id="4_2x766"]
+[ext_resource type="PackedScene" uid="uid://dhfrdolt4haqy" path="res://Spotlight.tscn" id="4_drlly"]
+[ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://button.tscn" id="5_fim7w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyx7j"]
 size = Vector3(20, 0.1, 20)
@@ -18,8 +19,11 @@ background_energy_multiplier = 0.23
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.56
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ccupy"]
-points = PackedVector3Array(0, -1.5, -6, 0, 1.5, -6, 1.5, 0, -6, -1.5, 0, -6, 1.1, 1, -6, -1.1, 1, -6, 1.1, -1, -6, -1.1, -1, -6, 0, 0, 0)
+[sub_resource type="BoxMesh" id="BoxMesh_tq8is"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ec5qy"]
+size = Vector3(5, 5, 5)
 
 [node name="Base" type="Node3D"]
 
@@ -33,10 +37,10 @@ shape = SubResource("BoxShape3D_gyx7j")
 mesh = SubResource("BoxMesh_4c3wm")
 
 [node name="charge_jump_block" parent="." instance=ExtResource("2_45utv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.68766, 0.819938, -3.46576)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52286, 0.861715, 1.87138)
 
 [node name="hold_rise_block" parent="." instance=ExtResource("3_rid4w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0439101, 0.569843, -6.29504)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, 0.794435, -7.64574)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
 axis_lock_angular_x = true
@@ -44,6 +48,7 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 
 [node name="Player" parent="." instance=ExtResource("1_qdbye")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32365, 5.00046, -7.70963)
 SENSITIVITY = 0.009
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -53,23 +58,20 @@ environment = SubResource("Environment_107vr")
 transform = Transform3D(0.993894, -0.110341, 6.57686e-09, 0.0837565, 0.754432, 0.651013, -0.0718337, -0.647037, 0.759067, 0, 1.8034, 0)
 light_energy = 0.222
 
-[node name="Spotlight" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.14353, 4.11591)
-script = ExtResource("4_2x766")
+[node name="Spotlight" parent="." instance=ExtResource("4_drlly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07829, 5.12503, -7.59749)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Spotlight"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.19097, 0)
-light_energy = 10.778
-spot_range = 6.47
-spot_angle = 12.5
+[node name="Button" parent="." instance=ExtResource("5_fim7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34516, 4.99879, -8.79748)
 
-[node name="Area3D" type="Area3D" parent="Spotlight"]
-collision_layer = 8388608
-collision_mask = 8388609
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89074, 2.51567, -7.66124)
 
-[node name="flashlight_collider" type="CollisionShape3D" parent="Spotlight/Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_ccupy")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_tq8is")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ec5qy")
 
 [connection signal="body_entered" from="Player" to="charge_jump_block" method="_on_player_body_entered"]
 [connection signal="body_entered" from="Player" to="hold_rise_block" method="_on_player_body_entered"]
@@ -81,5 +83,5 @@ shape = SubResource("ConvexPolygonShape3D_ccupy")
 [connection signal="body_exited" from="Spotlight" to="charge_jump_block" method="_on_player_body_exited"]
 [connection signal="body_exited" from="Spotlight" to="hold_rise_block" method="_on_player_body_exited"]
 [connection signal="body_exited" from="Spotlight" to="Player" method="_on_spotlight_exited"]
-[connection signal="body_entered" from="Spotlight/Area3D" to="Spotlight" method="_on_area_3d_body_entered"]
-[connection signal="body_exited" from="Spotlight/Area3D" to="Spotlight" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Button" to="Spotlight" method="_set_on"]
+[connection signal="body_exited" from="Button" to="Spotlight" method="_set_off"]

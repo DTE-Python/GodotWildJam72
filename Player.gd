@@ -10,8 +10,8 @@ var spotlight = false
 
 @export var flashlightArea:Area3D
 
-signal body_entered
-signal body_exited
+signal body_entered(body)
+signal body_exited(body)
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
