@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhfrdolt4haqy"]
+
+[ext_resource type="Script" path="res://Spotlight.gd" id="1_dtw65"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_korb3"]
+points = PackedVector3Array(0, -1.5, -6, 0, 1.5, -6, 1.5, 0, -6, -1.5, 0, -6, 1.1, 1, -6, -1.1, 1, -6, 1.1, -1, -6, -1.1, -1, -6, 0, 0, 0)
+
+[node name="Spotlight" type="Node3D" node_paths=PackedStringArray("area", "light")]
+script = ExtResource("1_dtw65")
+area = NodePath("Area3D")
+light = NodePath("SpotLight3D")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.19097, 0)
+light_energy = 10.778
+spot_range = 6.47
+spot_angle = 12.5
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8388608
+collision_mask = 8388609
+
+[node name="flashlight_collider" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_korb3")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
