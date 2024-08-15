@@ -6,6 +6,8 @@ signal body_exited(body)
 @export var area:Area3D
 @export var light:SpotLight3D
 
+@export var AffectedByButton: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -31,8 +33,10 @@ func _toggle_on_off():
 	light.visible = not light.visible
 	area.monitoring = light.visible
 	
-func _set_on():
-	_set_on_off(true)
+func _set_on(buttonID):
+	if AffectedByButton == buttonID:
+		_set_on_off(true)
 
-func _set_off():
-	_set_on_off(false)
+func _set_off(buttonID):
+	if AffectedByButton == buttonID:
+		_set_on_off(false)
