@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dq0qf3a3fwaw6"]
+[gd_scene load_steps=6 format=3 uid="uid://b373jwb3wo6m6"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_hqqjy"]
+[ext_resource type="Script" path="res://door_raycast.gd" id="2_4f0ms"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5etv8"]
 
@@ -39,6 +40,11 @@ collision_mask = 8388608
 [node name="flashlight_collider" type="CollisionShape3D" parent="Camera3D/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
 shape = SubResource("ConvexPolygonShape3D_ffop2")
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183541, -0.490605)
+target_position = Vector3(0, 0, -1)
+script = ExtResource("2_4f0ms")
 
 [connection signal="body_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Camera3D/Area3D" to="." method="_on_area_3d_body_exited"]

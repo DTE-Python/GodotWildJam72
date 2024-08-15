@@ -1,12 +1,12 @@
+[gd_scene load_steps=13 format=3 uid="uid://cq2evqbicb1ns"]
 
-[gd_scene load_steps=11 format=3 uid="uid://qg34dqw0unj7"]
-
-[ext_resource type="PackedScene" uid="uid://dq0qf3a3fwaw6" path="res://player.tscn" id="1_qdbye"]
-[ext_resource type="PackedScene" uid="uid://cqbiqupleo8xb" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
-[ext_resource type="PackedScene" uid="uid://buwylo2oxe406" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
-[ext_resource type="PackedScene" uid="uid://dhfrdolt4haqy" path="res://Spotlight.tscn" id="4_drlly"]
-[ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://button.tscn" id="5_fim7w"]
+[ext_resource type="PackedScene" uid="uid://b373jwb3wo6m6" path="res://player.tscn" id="1_qdbye"]
+[ext_resource type="PackedScene" uid="uid://d2bxg3s3rgfp5" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
+[ext_resource type="PackedScene" uid="uid://i6ai58f8crww" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
 [ext_resource type="PackedScene" uid="uid://s5n7db7yv2ef" path="res://level_goal.tscn" id="4_5iwyi"]
+[ext_resource type="PackedScene" uid="uid://dudq7pktthhvk" path="res://Spotlight.tscn" id="4_drlly"]
+[ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://button.tscn" id="5_fim7w"]
+[ext_resource type="PackedScene" uid="uid://bnesb0bdgpod7" path="res://door.tscn" id="7_xrs7d"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyx7j"]
 size = Vector3(20, 0.1, 20)
@@ -62,11 +62,16 @@ light_energy = 0.222
 
 [node name="LevelGoal" parent="." instance=ExtResource("4_5iwyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36031, 1.84796)
+
 [node name="Spotlight" parent="." instance=ExtResource("4_drlly")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07829, 5.12503, -7.59749)
 
 [node name="Button" parent="." instance=ExtResource("5_fim7w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34516, 4.99879, -8.79748)
+
+[node name="Button2" parent="." instance=ExtResource("5_fim7w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51061, 4.99879, -8.79748)
+ButtonID = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.89074, 2.51567, -7.66124)
@@ -76,6 +81,11 @@ mesh = SubResource("BoxMesh_tq8is")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_ec5qy")
+
+[node name="Door" parent="." instance=ExtResource("7_xrs7d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62861, 6.28302, -5.88918)
+PlayerCanInteract = true
+AffectedByButton = 1
 
 [connection signal="body_entered" from="Player" to="charge_jump_block" method="_on_player_body_entered"]
 [connection signal="body_entered" from="Player" to="hold_rise_block" method="_on_player_body_entered"]
@@ -90,3 +100,7 @@ shape = SubResource("BoxShape3D_ec5qy")
 [connection signal="body_exited" from="Spotlight" to="Player" method="_on_spotlight_exited"]
 [connection signal="body_entered" from="Button" to="Spotlight" method="_set_on"]
 [connection signal="body_exited" from="Button" to="Spotlight" method="_set_off"]
+[connection signal="body_entered" from="Button2" to="Spotlight" method="_set_on"]
+[connection signal="body_entered" from="Button2" to="Door" method="_on_button_body_entered"]
+[connection signal="body_exited" from="Button2" to="Spotlight" method="_set_off"]
+[connection signal="body_exited" from="Button2" to="Door" method="_on_button_body_exited"]
