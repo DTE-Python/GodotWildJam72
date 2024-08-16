@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b373jwb3wo6m6"]
+[gd_scene load_steps=7 format=3 uid="uid://b373jwb3wo6m6"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_hqqjy"]
-[ext_resource type="Script" path="res://door_raycast.gd" id="2_4f0ms"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_hqqjy"]
+[ext_resource type="Script" path="res://Scripts/door_raycast.gd" id="2_4f0ms"]
+[ext_resource type="PackedScene" uid="uid://b205w0qjpk77l" path="res://Menus/pause-menu.tscn" id="3_mjlv2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5etv8"]
 
@@ -45,6 +46,10 @@ shape = SubResource("ConvexPolygonShape3D_ffop2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183541, -0.490605)
 target_position = Vector3(0, 0, -1)
 script = ExtResource("2_4f0ms")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="Pause Menu" parent="Camera3D/CanvasLayer" instance=ExtResource("3_mjlv2")]
 
 [connection signal="body_entered" from="Camera3D/Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Camera3D/Area3D" to="." method="_on_area_3d_body_exited"]

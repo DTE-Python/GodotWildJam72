@@ -17,7 +17,7 @@ var elapsed_time = 0
 
 var release_time = 0
 
-var held = false
+var held = 0
 var start_height = 0
 var hold_pos = false
 
@@ -36,14 +36,14 @@ func _physics_process(delta):
 	var current_time = Time.get_unix_time_from_system()
 	var target_height = (max_height + start_height) - current_height
 	
-	if held and not hold_pos:
+	if held > 0 and not hold_pos:
 		if current_height < target_height:
 			apply_central_force(Vector3.UP * gravity * target_height * float_speed)
 			default_linear_velocity = linear_velocity
 		else:
 			hold_pos = true
 			
-	if current_height > target_height and not hold_pos and not held:
+	if current_height > target_height and not hold_pos and held < 1:
 		apply_central_force(Vector3.DOWN)
 			
 	if hold_pos:
@@ -67,9 +67,12 @@ func _input(event):
 
 func _on_player_body_entered(body):
 	if body == self:
-		held = true
+		held +=1
 
 
 func _on_player_body_exited(body):
 	if body == self:
-		held = false
+		held -=1
+		
+		if(held<1):
+			release_time = Time.get_unix_time_from_system()

@@ -31,7 +31,9 @@ func OtherInteraction(setting):
 	else:
 		animation_player.play("open")
 		
-	await get_tree().create_timer(1.0, false).timeout
+	if get_tree():
+		await get_tree().create_timer(1.0, false).timeout
+
 	
 	if resetPlayerInteract:
 		PlayerCanInteract = true
