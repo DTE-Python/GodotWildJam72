@@ -1,27 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://bnesb0bdgpod7"]
 
-[ext_resource type="Script" path="res://door.gd" id="1_6h081"]
+[ext_resource type="Script" path="res://Scripts/door.gd" id="1_6h081"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_6hlad"]
 size = Vector3(1.5, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0jiuc"]
 size = Vector3(1.5, 2.5, 0.1)
-
-[sub_resource type="Animation" id="Animation_ct4a0"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Hinge:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.1, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_y5j3x"]
 length = 0.001
@@ -51,6 +36,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 1.5708, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ct4a0"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n61ah"]

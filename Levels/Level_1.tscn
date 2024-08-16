@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://cq2evqbicb1ns"]
 
-[ext_resource type="PackedScene" uid="uid://b373jwb3wo6m6" path="res://player.tscn" id="1_qdbye"]
-[ext_resource type="PackedScene" uid="uid://d2bxg3s3rgfp5" path="res://ChargeJumpBlock.tscn" id="2_45utv"]
-[ext_resource type="PackedScene" uid="uid://i6ai58f8crww" path="res://HoldRiseBlock.tscn" id="3_rid4w"]
-[ext_resource type="PackedScene" uid="uid://s5n7db7yv2ef" path="res://level_goal.tscn" id="4_5iwyi"]
-[ext_resource type="PackedScene" uid="uid://dudq7pktthhvk" path="res://Spotlight.tscn" id="4_drlly"]
-[ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://button.tscn" id="5_fim7w"]
-[ext_resource type="PackedScene" uid="uid://bnesb0bdgpod7" path="res://door.tscn" id="7_xrs7d"]
+[ext_resource type="PackedScene" uid="uid://d2bxg3s3rgfp5" path="res://Assets/ChargeJumpBlock.tscn" id="1_e7a2u"]
+[ext_resource type="PackedScene" uid="uid://i6ai58f8crww" path="res://Assets/HoldRiseBlock.tscn" id="2_ae783"]
+[ext_resource type="PackedScene" uid="uid://b373jwb3wo6m6" path="res://Assets/player.tscn" id="3_01ehc"]
+[ext_resource type="PackedScene" uid="uid://s5n7db7yv2ef" path="res://Assets/level_goal.tscn" id="4_co3n1"]
+[ext_resource type="PackedScene" uid="uid://dudq7pktthhvk" path="res://Assets/Spotlight.tscn" id="5_fj2md"]
+[ext_resource type="PackedScene" uid="uid://b5l7btukwpcvo" path="res://Assets/button.tscn" id="6_nq8u7"]
+[ext_resource type="PackedScene" uid="uid://bnesb0bdgpod7" path="res://Assets/door.tscn" id="7_rddty"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gyx7j"]
 size = Vector3(20, 0.1, 20)
@@ -38,10 +38,10 @@ shape = SubResource("BoxShape3D_gyx7j")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_4c3wm")
 
-[node name="charge_jump_block" parent="." instance=ExtResource("2_45utv")]
+[node name="charge_jump_block" parent="." instance=ExtResource("1_e7a2u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52286, 0.861715, 1.87138)
 
-[node name="hold_rise_block" parent="." instance=ExtResource("3_rid4w")]
+[node name="hold_rise_block" parent="." instance=ExtResource("2_ae783")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00008, 0.794435, -7.64574)
 axis_lock_linear_x = true
 axis_lock_linear_z = true
@@ -49,7 +49,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 
-[node name="Player" parent="." instance=ExtResource("1_qdbye")]
+[node name="Player" parent="." instance=ExtResource("3_01ehc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.32365, 5.00046, -7.70963)
 SENSITIVITY = 0.009
 
@@ -60,16 +60,16 @@ environment = SubResource("Environment_107vr")
 transform = Transform3D(0.993894, -0.110341, 6.57686e-09, 0.0837565, 0.754432, 0.651013, -0.0718337, -0.647037, 0.759067, 0, 1.8034, 0)
 light_energy = 0.222
 
-[node name="LevelGoal" parent="." instance=ExtResource("4_5iwyi")]
+[node name="LevelGoal" parent="." instance=ExtResource("4_co3n1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36031, 1.84796)
 
-[node name="Spotlight" parent="." instance=ExtResource("4_drlly")]
+[node name="Spotlight" parent="." instance=ExtResource("5_fj2md")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07829, 5.12503, -7.59749)
 
-[node name="Button" parent="." instance=ExtResource("5_fim7w")]
+[node name="Button" parent="." instance=ExtResource("6_nq8u7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34516, 4.99879, -8.79748)
 
-[node name="Button2" parent="." instance=ExtResource("5_fim7w")]
+[node name="Button2" parent="." instance=ExtResource("6_nq8u7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.51061, 4.99879, -8.79748)
 ButtonID = 1
 
@@ -82,7 +82,7 @@ mesh = SubResource("BoxMesh_tq8is")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_ec5qy")
 
-[node name="Door" parent="." instance=ExtResource("7_xrs7d")]
+[node name="Door" parent="." instance=ExtResource("7_rddty")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62861, 6.28302, -5.88918)
 PlayerCanInteract = true
 AffectedByButton = 1

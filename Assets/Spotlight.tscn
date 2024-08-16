@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dudq7pktthhvk"]
 
-[ext_resource type="Script" path="res://Spotlight.gd" id="1_dtw65"]
+[ext_resource type="Script" path="res://Scripts/Spotlight.gd" id="1_dtw65"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_korb3"]
 points = PackedVector3Array(0, -1.5, -6, 0, 1.5, -6, 1.5, 0, -6, -1.5, 0, -6, 1.1, 1, -6, -1.1, 1, -6, 1.1, -1, -6, -1.1, -1, -6, 0, 0, 0)

@@ -48,8 +48,6 @@ func _physics_process(delta):
 		flashlight.visible = !flashlight.visible
 		flashlightArea.monitoring = flashlight.visible
 		
-	if Input.is_action_just_pressed("escape"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
